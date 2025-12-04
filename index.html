@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Very Old Man with Enormous Wings – A Social and Ethical Reading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f1720;
+      --bg-darker: #0b1017;
+      --bg-panel: rgba(23, 33, 44, 0.75);
+      --text-main: #e9edf3;
+      --text-subtle: #c2c8d3;
+      --accent: #6fb4ff;
+      --accent-warm: #c1a071;
+      --highlight: rgba(111, 180, 255, 0.1);
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', 'Inter', serif;
+      margin: 0 0 0.5em 0;
+      color: #f4f7fb;
+    }
+
+    p {
+      margin: 0 0 1em 0;
+      color: var(--text-subtle);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header.site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(120deg, rgba(11, 16, 23, 0.9), rgba(15, 23, 32, 0.92));
+      background-size: 200% 200%;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      overflow: hidden;
+      animation: gradientShift 22s ease-in-out infinite;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 2rem;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      font-weight: 600;
+      color: #f0f4fa;
+      white-space: pre-line;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      padding: 0.4rem 0.75rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.07);
+      color: #f0f4fa;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a:hover, nav a:focus-visible {
+      background: rgba(111, 180, 255, 0.18);
+      border-color: rgba(111, 180, 255, 0.35);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 10%, rgba(111, 180, 255, 0.25), transparent 30%),
+                  radial-gradient(circle at 80% 20%, rgba(193, 160, 113, 0.2), transparent 35%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    nav a:hover::after, nav a:focus-visible::after, nav a.active::after {
+      opacity: 1;
+    }
+
+    nav a.active {
+      background: rgba(111, 180, 255, 0.14);
+      border-color: rgba(111, 180, 255, 0.4);
+    }
+
+    main {
+      margin-top: 110px;
+    }
+
+    section {
+      position: relative;
+      padding: 6rem 1.5rem;
+      overflow: hidden;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(15, 23, 32, 0.9), rgba(15, 23, 32, 0.75));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .content::after {
+      content: "";
+      position: absolute;
+      inset: -40% -10% auto auto;
+      height: 120%;
+      width: 60%;
+      background: linear-gradient(135deg, rgba(111, 180, 255, 0.12), rgba(111, 180, 255, 0));
+      filter: blur(50px);
+      opacity: 0.35;
+      transform: rotate(6deg);
+      animation: softGlow 12s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .section-heading {
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .section-heading::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 120px;
+      background: linear-gradient(90deg, rgba(111, 180, 255, 0.8), rgba(193, 160, 113, 0.6));
+      border-radius: 999px;
+      box-shadow: 0 0 12px rgba(111, 180, 255, 0.35);
+      animation: shimmerLine 9s ease-in-out infinite;
+    }
+
+    .subheading {
+      margin-bottom: 1.5rem;
+      color: #dfe7f2;
+      letter-spacing: 0.02em;
+    }
+
+    .highlight-box {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      border-radius: 14px;
+      background: linear-gradient(120deg, rgba(111, 180, 255, 0.14), rgba(111, 180, 255, 0.05));
+      border: 1px solid rgba(111, 180, 255, 0.35);
+      color: #e8f1ff;
+      box-shadow: 0 0 0 1px rgba(111, 180, 255, 0.2), 0 25px 50px rgba(0, 0, 0, 0.25);
+      animation: pulseGlow 8s ease-in-out infinite;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(22, 31, 43, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(111, 180, 255, 0.08), rgba(111, 180, 255, 0));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .icon-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .icon-row img.icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+      animation: floaty 10s ease-in-out infinite alternate;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.35;
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .parallax-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5, 8, 12, 0.75), rgba(5, 8, 12, 0.95));
+      z-index: 1;
+    }
+
+    .visual-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .visual-layer img {
+      position: absolute;
+      opacity: 0.7;
+      max-width: 45%;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      filter: drop-shadow(0 12px 30px rgba(0,0,0,0.45));
+      animation: floaty 9s ease-in-out infinite alternate;
+    }
+
+    .visual-layer img.bottom-crabs {
+      left: 8%;
+      bottom: 4%;
+      max-width: 38%;
+      opacity: 0.8;
+      animation-duration: 11s;
+    }
+
+    .visual-layer img.fallen-angel {
+      right: 10%;
+      bottom: 6%;
+      max-width: 36%;
+      opacity: 0.55;
+      animation-duration: 13s;
+    }
+
+    .landing-text {
+      max-width: 760px;
+    }
+
+    .callout-column {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.75rem;
+      align-items: start;
+    }
+
+    .callout-column .highlight-box {
+      position: sticky;
+      top: 130px;
+    }
+
+    .muted-panel {
+      background: rgba(19, 27, 38, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .comparative {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .image-box {
+      background: rgba(15, 23, 32, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .footer-note {
+      margin-top: 1.5rem;
+      font-style: italic;
+      color: #d6deeb;
+    }
+
+    .soft-background {
+      background: radial-gradient(circle at 20% 20%, rgba(111, 180, 255, 0.08), transparent 35%),
+                  radial-gradient(circle at 80% 30%, rgba(193, 160, 113, 0.1), transparent 45%),
+                  linear-gradient(180deg, rgba(9, 14, 21, 0.9), rgba(9, 14, 21, 0.8));
+      position: relative;
+    }
+
+    .soft-background::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(111, 180, 255, 0.08), transparent 35%),
+                  radial-gradient(circle at 70% 60%, rgba(193, 160, 113, 0.08), transparent 40%);
+      opacity: 0.5;
+      animation: drift 16s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .callout-column {
+        grid-template-columns: 1fr;
+      }
+      .callout-column .highlight-box {
+        position: relative;
+        top: 0;
+      }
+      nav {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header.site-header {
+        position: sticky;
+      }
+      nav a {
+        flex: 1 1 calc(50% - 0.6rem);
+        text-align: center;
+      }
+      .content {
+        padding: 1.5rem;
+      }
+      section {
+        padding: 5rem 1rem;
+      }
+    }
+
+    @keyframes floaty {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-12px) scale(1.01); }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 1px rgba(111, 180, 255, 0.18), 0 25px 50px rgba(0, 0, 0, 0.25); }
+      50% { box-shadow: 0 0 0 2px rgba(111, 180, 255, 0.28), 0 30px 60px rgba(0, 0, 0, 0.3); }
+      100% { box-shadow: 0 0 0 1px rgba(111, 180, 255, 0.18), 0 25px 50px rgba(0, 0, 0, 0.25); }
+    }
+
+    @keyframes softGlow {
+      0% { transform: rotate(4deg) translateY(0); opacity: 0.3; }
+      50% { transform: rotate(8deg) translateY(8px); opacity: 0.4; }
+      100% { transform: rotate(6deg) translateY(-6px); opacity: 0.34; }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes drift {
+      0% { transform: translate3d(-10px, -6px, 0) scale(1); }
+      100% { transform: translate3d(10px, 12px, 0) scale(1.02); }
+    }
+
+    @keyframes shimmerLine {
+      0% { box-shadow: 0 0 12px rgba(111, 180, 255, 0.35); opacity: 0.75; }
+      50% { box-shadow: 0 0 18px rgba(193, 160, 113, 0.55); opacity: 1; }
+      100% { box-shadow: 0 0 12px rgba(111, 180, 255, 0.35); opacity: 0.75; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand" id="site-title">Interactive Analysis Website\nA Very Old Man with Enormous Wings – A Social and Ethical Reading</div>
+      <nav aria-label="Primary">
+        <a href="#landing">Landing</a>
+        <a href="#setting-and-world">Setting</a>
+        <a href="#human-reactions">Human Reactions</a>
+        <a href="#figurative-language">Figurative Language</a>
+        <a href="#comparative-work">Comparative</a>
+        <a href="#conclusion">Conclusion</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="landing">
+      <div class="parallax-bg" data-parallax-speed="0.2" style="background-image: linear-gradient(180deg, rgba(12,18,26,0.85), rgba(12,18,26,0.95)), url('imagery_wave_mud.png');"></div>
+      <div class="parallax-overlay"></div>
+      <div class="visual-layer">
+        <img src="shore_crabs.png" alt="Crabs on wet sand" class="bottom-crabs" data-parallax-speed="0.35">
+        <img src="fallen_angel_silhouette.png" alt="Silhouette of a fallen angel" class="fallen-angel" data-parallax-speed="0.25">
+      </div>
+      <div class="content callout-column animate-on-scroll">
+        <div class="landing-text">
+          <h1 class="section-heading">A Gray World and a Fallen Angel</h1>
+          <h2 class="subheading">Opening the Story of 'A Very Old Man with Enormous Wings'</h2>
+          <p>The story begins in a sad and tiring world. It has been raining for three days. Pelayo and his wife Elisenda live near the sea with their newborn baby. The baby is currently in a fever. Their courtyard is wet and dirty, and the beach is full of mud and rotten shellfish. Crabs have walked into the house, and the smell is so strong and disgusting that the parents think it might cause the baby to become sick. The narrator describes all of this in a calm way, indicating this kind of sadness and dirt is just normal life.</p>
+          <p>When Pelayo carries the dead crabs to the sea, he sees something moving and making sounds in the mud behind his courtyard: It is a very old man lying face-down. He cannot stand up because his enormous wings are stuck in the mud. His clothes look like rags. His wings are dirty, half-plucked, and covered with mud. At first, Pelayo and Elisenda are afraid of him. But as they look at him for a long time, their fear slowly fades, and the old man starts to feel strangely familiar. They speak to him, but he answers in a strange dialect with a strong sailor’s voice.</p>
+          <p>From this first scene, the story adds a character that might be holy, a winged old man, but inside a very ordinary and dirty place. There is no bright light, no exaggerated music or ceremony, no clear sign from heaven. Instead, there is only mud, bad smell, and a sick baby with fever. This surprising mix of the strange and the normal sets up the social and ethical lens of this project: by watching how Pelayo, Elisenda, their neighbor, the priest, and the crowd treat the old man, we can see what the story says about human nature, faith, and how we react to people who are weak, unclear, and different from us, even if they might really be somebody holy.</p>
+        </div>
+        <div class="highlight-box" id="lens-thesis">
+          <p><strong>Lens Statement:</strong> <span id="lens-text">This project will look at Gabriel García Márquez’s famous short story -- 'A Very Old Man with Enormous Wings' through a social and ethical lens. The story shows how people and the church react to a strange old man with wings who might be an angel. Instead of caring for him, they use him for money, entertainment, and satisfying their own wishes. Their actions raise questions about kindness, faith, and how we treat people who are different or hard to understand.</span></p>
+          <p><strong>Thesis:</strong> <span id="thesis-text">Using this social and ethical lens, this project argues that the story shows an uncomfortable but real truth: when something holy or different appears in a weak, dirty, and confusing method, many people see it as a problem or a tool, instead of a holy thing that deserves respect and care.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="setting-and-world" class="soft-background">
+      <div class="parallax-bg" data-parallax-speed="0.18" style="background-image: linear-gradient(180deg, rgba(15,22,31,0.85), rgba(15,22,31,0.95)), url('courtyard_chicken_coop.png'); opacity: 0.4;"></div>
+      <div class="parallax-overlay"></div>
+      <div class="content animate-on-scroll">
+        <h2 class="section-heading">A Sad World Since Tuesday: Setting and Tone</h2>
+        <h3 class="subheading">How the Story Joins the Strange and the Everyday</h3>
+        <p>The narrator says that 'the world had been sad since Tuesday.' For days, the sea and the sky become one gray color. The sand on the beach used to shine at night, but now it is like “a thick soup of mud and rotten shellfish”. Inside the house, crabs are everywhere. The smell is so bad that Pelayo and Elisenda believe it is the reason for baby’s fever. The light at noon is weak, and it is hard for Pelayo to see what is moving in his yard. This place is not bright or hopeful and it feels heavy and tired.</p>
+        <p>When the old man with wings appears, the narrator does not change to a special or excited tone. The arrival of a man with wings is told in the same calm voice as the rain and the dead crabs. The neighbor woman quickly says that he is an angel who has come for the child. But even this strong claim feels like one more ordinary opinion in daily life. No excitement, no holy music, no “extraordinary hope brought by an angle”, just mud and the terrible smell of dead crabs. The story quietly joins very strange things (a man with wings, a possible angel) with very normal things (a courtyard, a sick baby, killing crabs).</p>
+        <p>Because the story does not give clear signs or big speeches about the old man, readers cannot be sure what he really is. Is he really an angel? Or is he a lost sailor with weird wings? The text does not give a simple answer. Instead, we are invited to watch what the people do and how they speak about that alien old man. This is important for a social and ethical lens, because it moves our attention from what the old man actually is to how people treat him: a person who is just different.</p>
+      </div>
+    </section>
+
+    <section id="human-reactions">
+      <div class="parallax-bg" data-parallax-speed="0.12" style="background-image: linear-gradient(180deg, rgba(14,20,29,0.8), rgba(14,20,29,0.9)); opacity: 0.25;"></div>
+      <div class="parallax-overlay"></div>
+      <div class="content animate-on-scroll">
+        <h2 class="section-heading">How People Treat the Winged Old Man</h2>
+        <div class="mini-grid">
+          <div class="card animate-on-scroll">
+            <div class="icon-row">
+              <img src="icon_coins_ticket.svg" class="icon" alt="Coins and ticket icon">
+              <h3 class="subheading">Theme 1 – Turning the Angel into a Business</h3>
+            </div>
+            <p>At first, Pelayo and Elisenda are afraid of the old man. They even think about putting him on a raft with water and food, letting the sea decide what happens to him. But in the morning, they find many neighbors in front of the chicken coop and got very interested in the strange old man. People are having fun, looking at the old man and throwing him food through the wire, just like they were feeding an animal in a zoo or a circus.</p>
+            <p>Soon, Elisenda has a new idea. She puts up a fence and starts charging five cents for seeing the old man. People come from far away: A poor woman who since childhood has been counting her heartbeats and had run out of numbers; a Portuguese man who couldn’t sleep because the noise of the stars disturbed him; a sleepwalker who got up at night to undo the things he had done while awake…… Curious people who just want to see something new all stand in line. The courtyard becomes as busy as a market. In less than a week, Pelayo and Elisenda fill their rooms with money, and visitors are still coming endlessly.</p>
+            <p>The couple’s life have been significantly changed: they used to deal with killing crabs all day and night, but now they get countless money through just do nothing but letting visitor to visit that strange old man in the chicken coop. In addition, with the money they saved they built a two-story mansion with balconies and gardens and high netting so that crabs wouldn’t get in during the winter, and with iron bars on the windows so that angels wouldn’t get in. The story clearly shows how something that might be holy is turned into a business.</p>
+          </div>
+          <div class="card animate-on-scroll">
+            <div class="icon-row">
+              <img src="icon_chicken_coop.svg" class="icon" alt="Chicken coop icon">
+              <h3 class="subheading">Theme 2 – Treating the Angel as a Thing, Not a Person</h3>
+            </div>
+            <p>From the start, the old man is treated more like a strange animal instead of a human being. Pelayo “drags” him out of the mud and “locks” him in the chicken coop. He lies in a corner, and the crowd stands around and stares. Hens peck at his wings, trying to eat the bugs that live there. Cripples and sick people pull out his feathers and touch their own bodies with them, hoping for a cure. Even people who feel sorry for him throw stones to force him to stand up and move just to watch him better.</p>
+            <p>The old man almost never fights back. He eats little, mostly soft food like eggplant mush. He does not answer the priest in Latin. He does not shout at the crowd…… His quiet patience seems to be his only special power. The only time he reacts strongly is when someone burns his side with a branding iron. Then he “awoke with a start, ranting in his hermetic language and with tears in his eyes, and he flapped his wings a couple of times, which brought on a whirlwind of chicken dung and lunar dust and a gale of panic that did not seem to be of this world”. However, the people feel more fear than guilt. After that, they do not stop hurting him, but they are more careful not to do that extreme behavior again.</p>
+            <p>These scenes show an extraordinarily deep lack of respect. Most people do not ask who he is or what he feels, and they only think about what he can do for them. The calm way the narrator tells of these events makes them feel even colder: the tone suggests that such cruelty can become normal. Through this, the story criticizes how societies often treat weak, strange, or silent people: as things to use, not as people to care for.</p>
+          </div>
+          <div class="card animate-on-scroll">
+            <div class="icon-row">
+              <img src="icon_censer_candle.svg" class="icon" alt="Censer and candle icon">
+              <h3 class="subheading">Theme 3 – Faith, Miracles, and Easy Stories</h3>
+            </div>
+            <p>Father Gonzaga, the local priest, comes early to see the old man. Before he became a priest, he was a strong woodcutter. Now he stands by the fence, thinks about his religious lessons, and tries to test the stranger. He says 'good morning' to the old man in Latin, which he believes is the language of God. When the old man does not answer in Latin, the priest begins to doubt whether he is a real angel. Up close, the priest sees that the old man smells like the homeless and that his wings are dirty and full of bugs. He tells the crowd to be careful and says that the devil likes to use tricks. He promises to write to higher church leaders, up to the pope, but the answers are slow and cannot change what the people do.</p>
+            <p>While the church sends letters, people still come to the chicken coop and hope for miracles. Some strange things do happen: “the blind man who didn’t recover his sight but grew three new teeth, or the paralytic who did’t get to walk but almost won the lottery, and the leper whose sores sprouted sunflowers.” These events are called “consolation miracles.” They sound more like jokes than clear cures. In addition, since the miracles do not match what the sick people want, many visitors become angry or disappointed. </p>
+            <p>The angel’s fame finally ends when another show comes to town. It is a woman who has been turned into a giant spider with the head of a sad girl. She turned into this horrible appearance because she disobeyed her parents and went out to a dance. People pay to see her too. “They were permitted to ask her all manner of questions about her absurd state and to can examine her up and down so that no one would ever doubt the truth of her horror.” Her story is simple and clear: if you disobey, you may be punished. The crowd understands this message easily and feels both fear and pity. Compared to her, the quiet old man in the chicken coop seems boring and confusing. People soon leave him behind and spend their time and money on the spider woman instead.</p>
+            <p>Taken together, these scenes say something sharp about faith: many people in the story look for fast and clear results: a cure, a lottery win, a strong warning story. When they do not get what they want, they quickly move on. The old man does not speak clearly, and his miracles are strange. Therefore, his presence is hard to explain. Because of this, the town does not really listen to him or learn from him. The story suggests that the problem is not only whether miracles are real, but also whether people are willing to stay with something that is hard, unclear, and full of pain.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="figurative-language" class="soft-background">
+      <div class="parallax-bg" data-parallax-speed="0.1" style="background-image: linear-gradient(180deg, rgba(16,24,35,0.8), rgba(16,24,35,0.9)); opacity: 0.25;"></div>
+      <div class="parallax-overlay"></div>
+      <div class="content animate-on-scroll">
+        <h2 class="section-heading">Figurative Language and Imagery</h2>
+        <div class="grid-two">
+          <div class="card animate-on-scroll">
+            <div class="icon-row">
+              <img src="imagery_wave_mud.png" alt="Imagery banner" style="width:64px; height:auto; border-radius:10px; object-fit:cover;">
+              <h3 class="subheading">Device 1 – Imagery: Strong Pictures and Senses</h3>
+            </div>
+            <p>Imagery is language that helps us see, hear, smell, taste, or feel something in our minds. In this story, there are many strong images. We see the beach as mud and rotten shellfish. We smell the crabs that fill the house with a bad odor. We see weak light at noon and a courtyard full of water. We also see the old man’s wings, which are dirty, half-plucked, and tangled in the mud. These details are simple but very clear. They make the world of the story feel real and heavy.</p>
+            <p>This use of imagery is important for the story’s meaning. An angel usually appears in bright, clean light in many stories. Here, if the old man is an angel, he lies in mud with bugs in his feathers. The strong, dirty images remind us that this story is not about a perfect, shining heaven. It is about a hard world and a possible miracle inside it. Since the pictures in our minds are so physical and rough, we all have to think about what holiness might look like in the middle of real human life.</p>
+          </div>
+          <div class="card animate-on-scroll">
+            <div class="icon-row">
+              <img src="symbolism_wings_icon.png" alt="Symbolic wings" style="width:58px; height:auto; border-radius:12px; object-fit:contain;">
+              <h3 class="subheading">Device 2 – Symbolism: Wings, the Chicken Coop, and the Spider Woman</h3>
+            </div>
+            <p>A symbol is something that stands for more than itself. 
+The old man’s wings are a clear symbol. They show a connection to the sky, to freedom, and even to heaven. But in most of the story, they do not help him fly. They are heavy, dirty, and full of bugs. They make it hard for him to move. People pull out his feathers and use them. At the same time, readers know that normal old men do not have wings at all. The wings suggest that he is more than he seems, even if people do not treat him that way. At the end, when new feathers grow and he slowly rises into the air, the wings finally carry him away. They then return to their usual meaning of escape and higher life.</p>
+            <p>The chicken coop is also a symbol. It is a small, dirty space for animals, not a human. When Pelayo locks the old man there, he turns a strange and possibly holy guest into something like a farm animal. The coop stands for how people try to control what they do not understand. By putting the old man in that cage, they can watch him, use him, and even make money from him, but they do not have to face him as an equal. The coop is the physical sign of this choice.</p>
+            <p>The spider woman is another powerful symbol. Her body joins a human head and a giant spider. Her story is very easy to read: she disobeyed her parents, went to a dance, and as a result was turned into a monster. People like her show because it gives them a simple lesson about right and wrong. She stands for the kind of story that people find safe and clear. When we put her next to the old man, who does not offer any simple message, we can see how the town prefers easy symbols and fast answers over slow, difficult thinking.</p>
+          </div>
+          <div class="card animate-on-scroll">
+            <div class="icon-row">
+              <img src="irony_feathers_icon.png" alt="Floating feathers" style="width:52px; height:64px; border-radius:12px; object-fit:cover;">
+              <h3 class="subheading">Device 3 – Irony: Surprising Outcomes and Feelings</h3>
+            </div>
+            <p>Irony happens when what actually happens is very very different from what people expect. In this story, many characters expect the old man with wings to give them normal miracles. A blind man wants to see again. A paralytic man wants to walk. A leper wants his sores to go away. Instead, the blind man grows three new teeth, the paralytic man almost wins the lottery, and the leper’s sores grow sunflowers. These results are not what anyone asked for. They are strange and almost funny. This makes the miracles ironic. They show that people cannot fully control what they receive, even when they stand in front of someone who might be holy. </p>
+            <p>There is also irony in how the old man’s fame rises and falls. At one point, the crowd is so big that soldiers must come with bayonets to control it. People suggest making him mayor of the world, a top general, or even the father of a new race of wise people with wings. Later, he is almost alone, while people stand in line to see the spider woman instead of him. The person who might be a real angel becomes less popular than a new show that tells a simpler story. This is a sad and ironic change.</p>
+            <p>The ending is also full of irony. After many years of sickness, the old man begins to grow new feathers and tries to fly again. His attempts are clumsy, and he almost breaks things in the yard. Still, he finally rises above the houses and slowly moves toward the sea until he is just a dot in the sky. Elisenda watches him go and feels relief because he will no longer bother her life. The most wonderful and strange moment, the final flight, is experienced by her not as a blessing but as a problem that has finally gone away. This gap between what the reader feels and what she feels is another strong use of irony.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comparative-work">
+      <div class="parallax-bg" data-parallax-speed="0.09" style="background-image: linear-gradient(180deg, rgba(12,17,25,0.82), rgba(12,17,25,0.9)); opacity: 0.28;"></div>
+      <div class="parallax-overlay"></div>
+      <div class="content animate-on-scroll">
+        <h2 class="section-heading">Comparing Two Works: Faith, Doubt, and the Sacred</h2>
+        <h3 class="subheading">Caravaggio’s 'The Incredulity of Saint Thomas'</h3>
+        <div class="comparative">
+          <div class="card animate-on-scroll">
+            <p>The work used for comparison in this project is 'The Incredulity of Saint Thomas,' a painting by Caravaggio from the early seventeenth century. The scene comes from the Bible. It shows Jesus after he has risen from the dead and the apostle Thomas, who did not believe the news at first. In the painting, Jesus guides Thomas’s hand so that Thomas can put his finger into the wound on his body. Two other followers lean in and watch very closely. The background is dark, and a strong light falls on their faces and on the wound. This light makes the bodies look very real and draws our eyes to the place where doubt and belief meet. </p>
+            <p>The painting deals with doubt, faith, and proof. Thomas says he will not believe it until he can see and touch the wounds. In the picture, the moment when he touches the wound is frozen in time. Thomas’s face and body show shock and deep thinking. Jesus lets Thomas touch his body and does not pull away. The strong light on Jesus’s body and on Thomas’s hand suggests that truth is being shown in a very direct way. The painting suggests that some people need to see and touch before they can truly believe.</p>
+          </div>
+          <div class="image-box animate-on-scroll">
+            <img src="the_incredulity_of_saint_thomas.webp" alt="The Incredulity of Saint Thomas painting">
+          </div>
+        </div>
+        <h3 class="subheading" style="margin-top:1.5rem;">Similar Questions, Very Different Stories</h3>
+        <div class="grid-two">
+          <div class="card animate-on-scroll">
+            <p>Both the story and the painting show a meeting between the sacred and the human, but they do it in different ways. In Caravaggio’s painting, Jesus clearly looks like the main holy figure, even though he still carries his wound. Thomas gets a clear and close chance to test whether Jesus is real. The scene has one strong answer to the question of doubt. In the short story, the old man has wings, but he is also dirty, weak, and old. No voice from the sky explains who he is. The story never gives one final answer. It leaves a space for doubt and many different views.</p>
+            <p>The way people respond is also different. In the painting, Thomas is honest about his doubts: when he finally touches Jesus’s wound, the scene suggests that he moves toward belief. The viewer is invited to see this as a serious moment where faith is strengthened. In the story, most people do not show this kind of serious search for truth. They lock the old man in a coop, sell tickets, test him with rough tricks, and finally forget about him when a new show of the spider woman arrives. Even the priest does not care for the old man’s body or feelings. This contrast shows that even when something strange and powerful stands in front of them, people may still choose selfish or lazy responses.</p>
+            <p>Looking at these two works together through a social and ethical lens raises a hard question. Is the main problem that people do not have enough proof, or is it that they do not use proof in a kind way? In Caravaggio’s painting, physical proof is given to Thomas, and the scene moves toward faith. In the story, the town has more than enough signs that the winged old man is not normal, but they mostly use him to make money or to entertain. The story suggests that seeing something special does not mean we will treat it well. That choice depends on our ethics, not only on our eyes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="conclusion" class="soft-background">
+      <div class="parallax-bg" data-parallax-speed="0.07" style="background-image: linear-gradient(180deg, rgba(18,28,39,0.85), rgba(12,18,26,0.9));"></div>
+      <div class="parallax-overlay"></div>
+      <div class="visual-layer">
+        <img src="symbolism_wings_icon.png" alt="Small winged figure" style="width: 160px; right: 8%; top: 12%; opacity: 0.35;">
+      </div>
+      <div class="content animate-on-scroll">
+        <h2 class="section-heading">What This Story Says About the World – And About Us</h2>
+        <p>At the end of 'A Very Old Man with Enormous Wings,' we still do not know for sure what the old man is. We do know what happened around him. People stared at him, used him as a show, asked him for help, and finally lost interest. Pelayo and Elisenda became rich from him and then were happy to see him go. When he finally gains enough strength to fly away, Elisenda feels relief because he will no longer disturb her life. Through a social and ethical lens, this feels like a warning. The story shows how easy it is for people to ignore or push away something special when it does not fit their idea of a miracle, even if it is actually a holy figure.</p>
+        <p>The town in the story is small, but the way people act feels familiar. In many places, people look at others who are weak, strange, or poor as if they are problems, not as neighbors. Crowds often enjoy watching suffering as if it were a show. People like simple stories about punishment and reward more than quiet, unclear forms of pain. The winged old man can be seen as a picture of all the people we do not want to see: the sick, the old, the foreign, or anyone who does not speak our language or fit our rules. The story suggests that the real test of faith and humanity is how we treat these people.</p>
+        <p>Working on this project has made me think about my own reactions. It is easy to say that I would never throw stones, pull out feathers, or lock someone in a coop. But the story shows that very common people did these things, step by step, without thinking that they were doing great harm. I have to ask myself: when I meet someone who is hard to understand, or who seems strange, do I really listen and care, or do I quickly look away and move on to something more comfortable, or I even tricked him for fun? The comparison with Caravaggio’s painting also reminds me that seeing is not enough. Thomas touches the wound and then must decide what to believe. In the same way, when I 'see' people who suffer, I still have to choose how to act.</p>
+        <p class="footer-note">"In the end, the winged old man becomes only a small dot in the sky for Elisenda, but the questions he leaves behind about faith, kindness, and human nature stay close to us and do not fly away."</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const SITE_TITLE = "A Very Old Man with Enormous Wings – A Social and Ethical Reading";
+    const GLOBAL_LENS_STATEMENT = "This project will look at Gabriel García Márquez’s famous short story -- 'A Very Old Man with Enormous Wings' through a social and ethical lens. The story shows how people and the church react to a strange old man with wings who might be an angel. Instead of caring for him, they use him for money, entertainment, and satisfying their own wishes. Their actions raise questions about kindness, faith, and how we treat people who are different or hard to understand.";
+    const GLOBAL_THESIS_STATEMENT = "Using this social and ethical lens, this project argues that the story shows an uncomfortable but real truth: when something holy or different appears in a weak, dirty, and confusing method, many people see it as a problem or a tool, instead of a holy thing that deserves respect and care.";
+
+    document.getElementById('site-title').textContent = `Interactive Analysis Website\n${SITE_TITLE}`;
+    document.getElementById('lens-text').textContent = GLOBAL_LENS_STATEMENT;
+    document.getElementById('thesis-text').textContent = GLOBAL_THESIS_STATEMENT;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+    function handleParallax() {
+      const scrolled = window.pageYOffset;
+      document.querySelectorAll('[data-parallax-speed]').forEach(el => {
+        const speed = parseFloat(el.getAttribute('data-parallax-speed')) || 0.1;
+        el.style.transform = `translateY(${scrolled * speed * -0.2}px)`;
+      });
+    }
+
+    const navLinks = Array.from(document.querySelectorAll('nav a'));
+    const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+
+    function handleNavHighlight() {
+      const scrollPos = window.scrollY + window.innerHeight * 0.25;
+      let currentId = sections[0]?.id;
+      sections.forEach(section => {
+        if (scrollPos >= section.offsetTop) {
+          currentId = section.id;
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      handleParallax();
+      handleNavHighlight();
+    }, { passive: true });
+    handleParallax();
+    handleNavHighlight();
+  </script>
+</body>
+</html>
